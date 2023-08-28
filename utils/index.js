@@ -33,3 +33,5 @@ const product = [
     job: "writer",
   },
 ];
+
+export { product };
