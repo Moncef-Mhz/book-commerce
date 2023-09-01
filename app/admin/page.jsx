@@ -1,7 +1,7 @@
 import React from "react";
 
-function page() {
-  return <div>page</div>;
+function Dashboad() {
+  return <div>flex</div>;
 }
 
-export default page;
+export default Dashboad;
