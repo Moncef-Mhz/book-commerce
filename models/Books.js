@@ -7,7 +7,8 @@ const BookSchema = new Schema(
     description: String,
     price: Number,
     category: [String],
-    author: { type: Schema.Types.ObjectId, ref: "Author" },
+    author: String,
+    job: String,
   },
   { timeseries: true }
 );
