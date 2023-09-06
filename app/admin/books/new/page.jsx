@@ -2,9 +2,8 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { TfiImport } from "react-icons/tfi";
 
-function newBook() {
+function NewBook() {
   //Book states
   const [title, setTitle] = useState("");
   const [description, setdescription] = useState("");
@@ -12,35 +11,24 @@ function newBook() {
   const [price, setprice] = useState(0);
   const [author, setauthor] = useState("");
   const [job, setjob] = useState("");
-  const [image, setImage] = useState("");
+  // const [image, setImage] = useState([]);
 
   // cloudinary handler
-  const handleImage = (e) => {
-    const file = e.target.files[0];
-    setFileToBase(file);
-  };
-  const setFileToBase = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImage(reader.result);
-    };
-  };
+  // const handleImage = (e) => {
+  //   const file = e.target.files[0];
+  //   setFileToBase(file);
+  // };
+  // const setFileToBase = (file) => {
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.onloadend = () => {
+  //     setImage(reader.result);
+  //   };
+  // };
 
   //adding books to DB
   const submitHandler = async (e) => {
     e.preventDefault();
-    // if (
-    //   title == "" ||
-    //   categories == "" ||
-    //   description == "" ||
-    //   author == "" ||
-    //   job == "" ||
-    //   image == ""
-    // ) {
-    //   console.log("feild are messing");
-    //   return;
-    // }
 
     try {
       let slug = title.replace(" ", "-");
@@ -56,7 +44,7 @@ function newBook() {
           price,
           author,
           job,
-          image,
+          // image,
         }),
       });
       if (response.ok) {
@@ -66,7 +54,7 @@ function newBook() {
         setdescription("");
         setjob("");
         setprice(0);
-        setImage("");
+        // setImage("");
       }
     } catch (err) {
       console.log(err);
@@ -162,20 +150,20 @@ function newBook() {
             required
           />
         </div>
-        <div className="flex flex-col gap-2 relative">
+        {/* <div className="flex flex-col gap-2 relative">
           <label htmlFor="" className="text-lg">
             Book image:
           </label>
           <input
             type="file"
-            file={image}
-            id="formupload"
+            // file={image}
+            // id="formupload"
             onChange={handleImage}
             className="px-4 py-2 rounded outline-0"
             placeholder="ex: Writer"
             required
           />
-        </div>
+        </div> */}
         <div className="mt-2 flex items-center justify-end">
           <button
             className="bg-indigo-500 text-white px-4 py-2 rounded text-lg"
@@ -189,4 +177,4 @@ function newBook() {
   );
 }
 
-export default newBook;
+export default NewBook;
