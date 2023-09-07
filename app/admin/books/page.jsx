@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { product } from "@utils";
 import Link from "next/link";
+import SelectDropdown from "@components/Dropdown";
 
 function Books() {
   const [allBooks, setAllBooks] = useState([]);
@@ -39,6 +40,9 @@ function Books() {
       {product.map((item) => (
         <div key={item.id}>{item.title}</div>
       ))}
+      {/* <div className="bg-indigo-200 overflow-hidden w-auto">
+        <SelectDropdown />
+      </div> */}
     </div>
   );
 }

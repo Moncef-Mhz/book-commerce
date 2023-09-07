@@ -1,7 +1,14 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from "@nextui-org/react";
 
 function NewBook() {
   //Book states
@@ -12,6 +19,16 @@ function NewBook() {
   const [author, setauthor] = useState("");
   const [job, setjob] = useState("");
   // const [image, setImage] = useState([]);
+
+  //Tags states
+  const [Tags, setTags] = useState([]);
+
+  //dropdown states
+  const [selectedKeys, setSelectedKeys] = useState(["finance"]);
+  const selectedValue = React.useMemo(
+    () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
+    [selectedKeys]
+  );
 
   // cloudinary handler
   // const handleImage = (e) => {
@@ -26,13 +43,26 @@ function NewBook() {
   //   };
   // };
 
+  // Getting tags data from DB
+  const getTagsData = async () => {
+    const response = await fetch("/api/admin/tag");
+    const data = await response.json();
+
+    setTags(data);
+  };
+
+  useEffect(() => {
+    getTagsData();
+  }, []);
+
   //adding books to DB
   const submitHandler = async (e) => {
     e.preventDefault();
 
     try {
       let slug = title.replace(" ", "-");
-      let category = categories.split(",");
+      let category = selectedValue.split(", ");
+      console.log(category);
 
       const response = await fetch("/api/admin/books/new", {
         method: "POST",
@@ -54,6 +84,7 @@ function NewBook() {
         setdescription("");
         setjob("");
         setprice(0);
+        setSelectedKeys("");
         // setImage("");
       }
     } catch (err) {
@@ -101,14 +132,47 @@ function NewBook() {
           <label htmlFor="" className="text-lg">
             Category:
           </label>
-          <input
-            type="text"
-            value={categories}
-            onChange={(e) => setcategories(e.target.value)}
-            className="px-4 py-2 rounded outline-indigo-500 "
-            placeholder="ex: finance,self improvment"
-            required
-          />
+          <div className="">
+            {/* <input
+              type="text"
+              value={categories}
+              onChange={(e) => setcategories(e.target.value)}
+              className="px-4 py-2 rounded outline-indigo-500 "
+              placeholder="ex: finance,self improvment"
+              required
+            /> */}
+            <div>
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button
+                    variant="bordered"
+                    className="capitalize bg-white  text-dark rounded-md outline-none px-4 py-2"
+                  >
+                    {selectedValue}
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu
+                  className="bg-white  text-dark flex flex-col  text-lg rounded-md outline-none overflow-hidden"
+                  aria-label="Multiple selection example"
+                  variant="flat"
+                  closeOnSelect={false}
+                  disallowEmptySelection={false}
+                  selectionMode="multiple"
+                  selectedKeys={selectedKeys}
+                  onSelectionChange={setSelectedKeys}
+                >
+                  {Tags.map((item) => (
+                    <DropdownItem
+                      key={item.tag}
+                      className="hover:bg-slate-300 w-full h-full px-4 py-2 duration-150"
+                    >
+                      {item.tag}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+          </div>
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="" className="text-lg">
