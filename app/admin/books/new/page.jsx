@@ -1,7 +1,11 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { AiOutlineArrowLeft, AiOutlineCheck } from "react-icons/ai";
+import {
+  AiOutlineArrowLeft,
+  AiOutlineCheck,
+  AiOutlinePlus,
+} from "react-icons/ai";
 import {
   Dropdown,
   DropdownTrigger,
@@ -131,7 +135,7 @@ function NewBook() {
             Category:
           </label>
           <div className="">
-            <div>
+            <div className="flex flex-wrap items-center gap-3">
               <Dropdown>
                 <DropdownTrigger>
                   <Button
@@ -161,6 +165,12 @@ function NewBook() {
                   ))}
                 </DropdownMenu>
               </Dropdown>
+              <Link
+                href="/admin/tags/new"
+                className="bg-indigo-400 px-6 py-2 rounded"
+              >
+                <AiOutlinePlus size={25} color="white" />
+              </Link>
             </div>
           </div>
         </div>

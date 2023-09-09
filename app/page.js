@@ -1,34 +1,30 @@
-import Image from "next/image";
-import Link from "next/link";
+"use client";
+import Books from "@components/Books";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  //book state
+  const [books, setBooks] = useState([]);
+
+  //fetching books from DB
+  const fetchBooks = async () => {
+    const response = await fetch("/api/admin/books");
+    const data = await response.json();
+
+    setBooks(data);
+  };
+
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
   return (
     <main className="m-5">
       <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-        {/* {product.map((item) => (
-          <Link
-            className="flex flex-col gap-1  items-center"
-            href={`/${item.id}`}
-            key={item.id}
-          >
-            <Image
-              src={item.img}
-              height={300}
-              width={300}
-              className=" h-[400px]"
-              alt={ite`m.name}
-              style={{ objectFit: "contain" }}
-              // fill={true}
-              loading="lazy"
-            />
-            <div className="flex px-7 py-2 w-full justify-between items-center">
-              <h1 className="font-semibold text-lg">{item.title}</h1>
-              <p className="font-semibold">{item.price}$</p>
-            </div>
-          </Link>
-        ))} */}
+        {books.map((item) => (
+          <Books item={item} />
+        ))}
       </div>
-      {/* <Product product={product} /> */}
     </main>
   );
 }

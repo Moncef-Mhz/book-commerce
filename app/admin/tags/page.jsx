@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineEdit, AiOutlinePlus } from "react-icons/ai";
 
 function TagsPage() {
   //State
@@ -42,11 +42,15 @@ function TagsPage() {
             className="flex w-full  justify-between px-2 py-2 hover:bg-slate-300 duration-200"
           >
             <h1 className="text-lg capitalize">{item.tag}</h1>
-            <AiOutlineDelete
-              size={25}
-              className="cursor-pointer"
-              // onClick={() => handleDelete(item)}
-            />
+            <div className="flex items-center justify-between gap-3">
+              <AiOutlineEdit size={25} className="cursor-pointer" />
+              <div className="py-2 w-[0.5px] bg-black/30 "></div>
+              <AiOutlineDelete
+                size={25}
+                className="cursor-pointer"
+                // onClick={() => handleDelete(item)}
+              />
+            </div>
           </div>
         ))
       ) : (

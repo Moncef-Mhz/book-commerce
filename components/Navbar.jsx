@@ -5,7 +5,9 @@ function Navbar() {
   const isAdmin = true;
   return (
     <div className="w-full h-[80px] px-5 items-center justify-between flex flex-row bg-slate-300">
-      <h1 className="text-3xl font-bold">Brand</h1>
+      <Link href="/" className="text-3xl font-bold">
+        Brand
+      </Link>
       <ul className="flex items-center justify-between gap-10 ">
         <li className="cursor-pointer uppercase text-sm font-semibold">
           <Link href="/">Shop</Link>
