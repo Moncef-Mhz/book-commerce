@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 
 function TagsPage() {
   //State
@@ -35,9 +35,23 @@ function TagsPage() {
           <AiOutlinePlus size={25} color="white" />
         </Link>
       </div>
-      {tags.map((item) => (
-        <div key={item._id}>{item.tag}</div>
-      ))}
+      {tags && tags.length > 0 ? (
+        tags.map((item) => (
+          <div
+            key={item._id}
+            className="flex w-full  justify-between px-2 py-2 hover:bg-slate-300 duration-200"
+          >
+            <h1 className="text-lg">{item.tag}</h1>
+            <AiOutlineDelete
+              size={25}
+              className="cursor-pointer"
+              // onClick={() => handleDelete(item)}
+            />
+          </div>
+        ))
+      ) : (
+        <h1>No Data</h1>
+      )}
     </div>
   );
 }

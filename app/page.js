@@ -1,5 +1,3 @@
-import Product from "@components/Product";
-import { product } from "@utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,7 +5,7 @@ export default function Home() {
   return (
     <main className="m-5">
       <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-        {product.map((item) => (
+        {/* {product.map((item) => (
           <Link
             className="flex flex-col gap-1  items-center"
             href={`/${item.id}`}
@@ -28,7 +26,7 @@ export default function Home() {
               <p className="font-semibold">{item.price}$</p>
             </div>
           </Link>
-        ))}
+        ))} */}
       </div>
       {/* <Product product={product} /> */}
     </main>

@@ -3,25 +3,25 @@ import { connectToDB } from "@utils/ConnectToDB";
 import cloudinary from "@utils/Cloudinary";
 
 export const POST = async (req) => {
-  const { title, price, description, slug, category, author, job } =
+  const { title, price, image, description, slug, category, author, job } =
     await req.json();
   try {
-    // const result = await cloudinary.uploader.upload(image, {
-    //   folder: "book_images",
-    // });
+    const result = await cloudinary.uploader.upload(image, {
+      folder: "book images",
+    });
     await connectToDB();
     const newBook = new Books({
       title,
       slug,
-      // image: {
-      //   public_id: result.public_id,
-      //   url: result.secure_url,
-      // },
       price,
       description,
       category,
       author,
       job,
+      image: {
+        public_id: result.public_id,
+        url: result.secure_url,
+      },
     });
 
     await newBook.save();

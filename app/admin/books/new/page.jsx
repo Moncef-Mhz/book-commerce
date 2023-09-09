@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import { AiOutlineArrowLeft, AiOutlineCheck } from "react-icons/ai";
 import {
   Dropdown,
   DropdownTrigger,
@@ -18,7 +18,7 @@ function NewBook() {
   const [price, setprice] = useState(0);
   const [author, setauthor] = useState("");
   const [job, setjob] = useState("");
-  // const [image, setImage] = useState([]);
+  const [image, setImage] = useState([]);
 
   //Tags states
   const [Tags, setTags] = useState([]);
@@ -30,18 +30,18 @@ function NewBook() {
     [selectedKeys]
   );
 
-  // cloudinary handler
-  // const handleImage = (e) => {
-  //   const file = e.target.files[0];
-  //   setFileToBase(file);
-  // };
-  // const setFileToBase = (file) => {
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = () => {
-  //     setImage(reader.result);
-  //   };
-  // };
+  //cloudinary handler
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    setFileToBase(file);
+  };
+  const setFileToBase = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImage(reader.result);
+    };
+  };
 
   // Getting tags data from DB
   const getTagsData = async () => {
@@ -58,11 +58,9 @@ function NewBook() {
   //adding books to DB
   const submitHandler = async (e) => {
     e.preventDefault();
-
     try {
       let slug = title.replace(" ", "-");
       let category = selectedValue.split(", ");
-      console.log(category);
 
       const response = await fetch("/api/admin/books/new", {
         method: "POST",
@@ -74,7 +72,7 @@ function NewBook() {
           price,
           author,
           job,
-          // image,
+          image,
         }),
       });
       if (response.ok) {
@@ -84,8 +82,8 @@ function NewBook() {
         setdescription("");
         setjob("");
         setprice(0);
-        setSelectedKeys("");
-        // setImage("");
+        setSelectedKeys(["finance"]);
+        setImage("");
       }
     } catch (err) {
       console.log(err);
@@ -133,14 +131,6 @@ function NewBook() {
             Category:
           </label>
           <div className="">
-            {/* <input
-              type="text"
-              value={categories}
-              onChange={(e) => setcategories(e.target.value)}
-              className="px-4 py-2 rounded outline-indigo-500 "
-              placeholder="ex: finance,self improvment"
-              required
-            /> */}
             <div>
               <Dropdown>
                 <DropdownTrigger>
@@ -164,9 +154,9 @@ function NewBook() {
                   {Tags.map((item) => (
                     <DropdownItem
                       key={item.tag}
-                      className="hover:bg-slate-300 w-full h-full px-4 py-2 duration-150"
+                      className="hover:bg-slate-300 w-full h-full px-4 py-2 duration-150 flex  flex-row justify-between items-center"
                     >
-                      {item.tag}
+                      <div>{item.tag}</div>
                     </DropdownItem>
                   ))}
                 </DropdownMenu>
@@ -214,20 +204,20 @@ function NewBook() {
             required
           />
         </div>
-        {/* <div className="flex flex-col gap-2 relative">
+        <div className="flex flex-col gap-2 relative">
           <label htmlFor="" className="text-lg">
             Book image:
           </label>
           <input
             type="file"
-            // file={image}
-            // id="formupload"
+            file={image}
+            id="formupload"
             onChange={handleImage}
             className="px-4 py-2 rounded outline-0"
-            placeholder="ex: Writer"
+            placeholder="select image"
             required
           />
-        </div> */}
+        </div>
         <div className="mt-2 flex items-center justify-end">
           <button
             className="bg-indigo-500 text-white px-4 py-2 rounded text-lg"

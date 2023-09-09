@@ -4,23 +4,23 @@ const BookSchema = new Schema(
   {
     title: String,
     slug: String,
-    // image: {
-    //   public_id: {
-    //     type: String,
-    //     required: true,
-    //   },
-    //   url: {
-    //     type: String,
-    //     required: true,
-    //   },
-    // },
     description: String,
     price: Number,
     category: [String],
     author: String,
     job: String,
+    image: {
+      public_id: {
+        type: String,
+        required: true,
+      },
+      url: {
+        type: String,
+        required: true,
+      },
+    },
   },
-  { timeseries: true }
+  { timestamps: true }
 );
 
 const Books = models.Books || model("Books", BookSchema);
