@@ -16,7 +16,7 @@ export default function Home() {
               height={300}
               width={300}
               className=" h-[400px]"
-              alt={item.name}
+              alt={ite`m.name}
               style={{ objectFit: "contain" }}
               // fill={true}
               loading="lazy"

@@ -41,7 +41,7 @@ function TagsPage() {
             key={item._id}
             className="flex w-full  justify-between px-2 py-2 hover:bg-slate-300 duration-200"
           >
-            <h1 className="text-lg">{item.tag}</h1>
+            <h1 className="text-lg capitalize">{item.tag}</h1>
             <AiOutlineDelete
               size={25}
               className="cursor-pointer"
