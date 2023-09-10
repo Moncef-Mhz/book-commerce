@@ -1,9 +1,12 @@
-import { model, models, Schema } from "mongoose";
+import mongoose, { model, models, Schema } from "mongoose";
+import slugGenerator from "mongoose-slug-generator/lib/slug-generator";
+
+mongoose.plugin(slugGenerator);
 
 const BookSchema = new Schema(
   {
     title: String,
-    slug: String,
+    slug: { type: String, slugGenerator: "title" },
     description: String,
     price: Number,
     category: [String],

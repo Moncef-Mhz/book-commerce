@@ -63,14 +63,14 @@ function NewBook() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      let slug = title.replace(" ", "-");
+      // let slug = title.replace(" ", "-");
       let category = selectedValue.split(", ");
 
       const response = await fetch("/api/admin/books/new", {
         method: "POST",
         body: JSON.stringify({
           title,
-          slug,
+          // slug,
           category,
           description,
           price,

@@ -12,7 +12,7 @@ export const POST = async (req) => {
     await connectToDB();
     const newBook = new Books({
       title,
-      slug,
+      // slug,
       price,
       description,
       category,
