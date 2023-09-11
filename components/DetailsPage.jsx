@@ -6,24 +6,21 @@ import {
   AiOutlineDown,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
+import { useStateContext } from "@context/StoreContext";
 
 function DetailsPage({ book }) {
+  const { onAdd, incQty, Qty, decQty, setShowCart } = useStateContext();
+
   //description State
   const [showdescription, setShowDescription] = useState(false);
 
-  //qty State
-  const [QTY, setQTY] = useState(0);
-
-  const Decrease = () => {
-    if (QTY === 0) {
+  const AddingToCartHandler = () => {
+    if (Qty < 1) {
       return;
-    } else {
-      setQTY((prev) => prev - 1);
     }
+    onAdd(book, Qty);
   };
-  const Increase = () => {
-    setQTY((prev) => prev + 1);
-  };
+
   return (
     <div className="flex flex-col md:flex-row w-full p-5 ">
       {/* Image */}
@@ -88,15 +85,18 @@ function DetailsPage({ book }) {
         {/* QTY & Order */}
         <div className="flex gap-5 justify-between">
           <div className="flex border w-full justify-between p-4">
-            <button className="text-xl cursor-pointer" onClick={Decrease}>
+            <button className="text-xl cursor-pointer" onClick={decQty}>
               -
             </button>
-            <div className="text-xl">{QTY}</div>
-            <button className="text-xl cursor-pointer" onClick={Increase}>
+            <div className="text-xl">{Qty}</div>
+            <button className="text-xl cursor-pointer" onClick={incQty}>
               +
             </button>
           </div>
-          <button className="bg-indigo-400 px-5 text-white text-lg  flex items-center justify-between w-full">
+          <button
+            className="bg-indigo-400 px-5 text-white text-lg  flex items-center justify-between w-full"
+            onClick={AddingToCartHandler}
+          >
             Add to Cart
             <AiOutlineShoppingCart size={25} />
           </button>

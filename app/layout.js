@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+// import { Suspense } from "react";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Navbar from "@components/Navbar";
@@ -14,12 +14,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <StoreContext>
-        <body className={`${inter.className} `}>
+      <body className={`${inter.className} `}>
+        <StoreContext>
           <Navbar />
-          <Suspense callback={<loading />}>{children}</Suspense>
-        </body>
-      </StoreContext>
+          {children}
+        </StoreContext>
+      </body>
     </html>
   );
 }

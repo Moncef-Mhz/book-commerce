@@ -10,6 +10,7 @@ export const StoreContext = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
 
+  let foundProduct;
   let index;
 
   const onAdd = (book, qty) => {
@@ -57,6 +58,15 @@ export const StoreContext = ({ children }) => {
       ]);
       setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price);
       setTotalQuantities((prevTotalQuantities) => prevTotalQuantities - 1);
+    } else if (value === "dec") {
+      if (foundProduct.qty > 1) {
+        setCartItems([
+          ...newCartItems,
+          { ...foundProduct, qty: foundProduct.qty - 1 },
+        ]);
+        setTotalPrice((prevPrice) => prevPrice - foundProduct.price);
+        setTotalQuantities((prevQty) => prevQty - 1);
+      }
     }
   };
   const incQty = () => {
@@ -70,7 +80,6 @@ export const StoreContext = ({ children }) => {
       return prevQty - 1;
     });
   };
-
   return (
     <Context.Provider
       value={{

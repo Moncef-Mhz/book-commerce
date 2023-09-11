@@ -2,8 +2,8 @@ import Link from "next/link";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
 function Navbar() {
-  const isAdmin = true;
-  const cartitem = 0;
+  const isAdmin = false;
+  const cartitem = 2;
   return (
     <div className="w-full h-[80px] px-5 items-center justify-between flex flex-row bg-slate-300">
       <Link href="/" className="text-3xl font-bold">
@@ -29,8 +29,8 @@ function Navbar() {
             A
           </Link>
         ) : (
-          <div className="relative">
-            <AiOutlineShoppingCart size={25} />
+          <div className="relative cursor-pointer">
+            <AiOutlineShoppingCart size={25} className="" />
             {cartitem > 0 ? (
               <div className="w-5 h-5 bg-red-500 rounded-full absolute -top-3 -right-3 flex items-center text-sm justify-center text-white ">
                 {cartitem > 99 ? <>99</> : cartitem}
