@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const Context = createContext();
 
@@ -30,9 +30,12 @@ export const StoreContext = ({ children }) => {
         }
       });
       setCartItems(updateCartItems);
+
+      // localStorage.setItem("cartItems", JSON.stringify([updateCartItems]));
     } else {
       book.qty = qty;
       setCartItems([...cartItems, { ...book }]);
+      // localStorage.setItem("cartItems", JSON.stringify([cartItems]));
     }
   };
   const onRemove = (book) => {
@@ -80,6 +83,8 @@ export const StoreContext = ({ children }) => {
       return prevQty - 1;
     });
   };
+
+  // localStorage.setItem("cartItems", JSON.stringify([cartItems]));
   return (
     <Context.Provider
       value={{
