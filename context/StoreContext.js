@@ -6,7 +6,7 @@ const Context = createContext();
 export const StoreContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [Qty, setQty] = useState(1);
+  const [Qty, setQty] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
 
@@ -32,7 +32,7 @@ export const StoreContext = ({ children }) => {
       setCartItems(updateCartItems);
     } else {
       book.qty = qty;
-      setTotalQuantities([...cartItems, { ...book }]);
+      setCartItems([...cartItems, { ...book }]);
     }
   };
   const onRemove = (book) => {
@@ -75,7 +75,7 @@ export const StoreContext = ({ children }) => {
 
   const decQty = () => {
     setQty((prevQty) => {
-      if (prevQty - 1 < 1) return 1;
+      if (prevQty - 1 < 0) return 0;
 
       return prevQty - 1;
     });

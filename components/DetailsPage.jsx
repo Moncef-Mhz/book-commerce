@@ -9,13 +9,14 @@ import {
 import { useStateContext } from "@context/StoreContext";
 
 function DetailsPage({ book }) {
-  const { onAdd, incQty, Qty, decQty, setShowCart } = useStateContext();
+  const { onAdd, incQty, Qty, decQty, setShowCart, cartItems } =
+    useStateContext();
 
   //description State
   const [showdescription, setShowDescription] = useState(false);
 
   const AddingToCartHandler = () => {
-    if (Qty < 1) {
+    if (Qty < 0) {
       return;
     }
     onAdd(book, Qty);
