@@ -22,7 +22,7 @@ export default function Home() {
     <main className="m-5">
       <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {books.map((item) => (
-          <Books item={item} />
+          <Books item={item} key={item._id} />
         ))}
       </div>
     </main>

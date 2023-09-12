@@ -13,6 +13,7 @@ function page() {
   //Context state
   const {
     cartItems,
+    setCartItems,
     onRemove,
     toggleCartItemQuantity,
     totalPrice,
@@ -21,19 +22,39 @@ function page() {
     incQty,
   } = useStateContext();
 
-  const submitHandler = () => {
-    // if (cartItems.length === 0) {
-    //   //Toastify.Warning
-    //   console.log("cartItems is empty");
-    //   return;
-    // }
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    if (cartItems.length === 0) {
+      //Toastify.Warning
+      console.log("cartItems is empty");
+      return;
+    }
     if (FullName == "" || Wilaya == "" || Adress == "" || Number == "") {
       console.log("some field are empty");
       return;
     } else {
       localStorage.setItem("Adress", [FullName, Wilaya, Adress, Number]);
     }
-    console.log("sucess");
+    try {
+      const response = await fetch("/api/orders/new", {
+        method: "POST",
+        body: JSON.stringify({
+          FullName,
+          Wilaya,
+          Adress,
+          Number,
+          Items: cartItems,
+        }),
+      });
+      if (response.ok) {
+        //toastify.success
+        setCartItems([]);
+      }
+    } catch (err) {
+      //toastify.error
+      console.log(err);
+    }
   };
 
   useEffect(() => {

@@ -13,6 +13,7 @@ function Books({ item }) {
         <Image
           src={item.image.url}
           height={300}
+          alt={item.title}
           width={300}
           className=" h-[400px]"
           style={{ objectFit: "contain" }}
