@@ -2,7 +2,7 @@ import Orders from "@models/Orders";
 import { connectToDB } from "@utils/ConnectToDB";
 
 export const POST = async (req) => {
-  const { FullName, Wilaya, Adress, Number, Items } = await req.json();
+  const { FullName, Wilaya, Adress, Number, Items, Price } = await req.json();
 
   try {
     await connectToDB();
@@ -12,6 +12,7 @@ export const POST = async (req) => {
       Adress,
       Number,
       Items,
+      Price,
     });
 
     await newOrder.save();

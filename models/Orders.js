@@ -7,6 +7,7 @@ const OrderSchema = new Schema(
     Adress: { type: String, required: true },
     Number: { type: String, required: true },
     Items: { type: [Object], required: true },
+    Price: { type: Number, required: true },
   },
   { timestamps: true }
 );

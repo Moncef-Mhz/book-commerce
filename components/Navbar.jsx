@@ -7,7 +7,7 @@ import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
 function Navbar() {
   const [openMenu, setOpenMenu] = useState(false);
   const { Qty, totalQuantities } = useStateContext();
-  const isAdmin = false;
+  const isAdmin = true;
   return (
     <div className="w-full h-[80px] px-5 items-center justify-between flex flex-row bg-slate-300 relative z-10  ">
       <Link href="/" className="text-3xl font-bold">

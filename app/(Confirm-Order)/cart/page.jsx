@@ -1,7 +1,6 @@
 "use client";
 import { useStateContext } from "@context/StoreContext";
 import React, { useEffect, useState } from "react";
-import { product } from "@utils";
 import { AiOutlineDelete } from "react-icons/ai";
 function page() {
   //Adress State
@@ -16,6 +15,8 @@ function page() {
     setCartItems,
     onRemove,
     toggleCartItemQuantity,
+    setTotalQuantities,
+    setTotalPrice,
     totalPrice,
     totalQuantities,
     decQty,
@@ -45,11 +46,14 @@ function page() {
           Adress,
           Number,
           Items: cartItems,
+          Price: totalPrice,
         }),
       });
       if (response.ok) {
         //toastify.success
         setCartItems([]);
+        setTotalQuantities(0);
+        setTotalPrice(0);
       }
     } catch (err) {
       //toastify.error
